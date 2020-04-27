@@ -40,6 +40,10 @@ const countById = (id, arr = []) => {
   return arr.filter(el => el.id === id).length;
 };
 
+const findElById = (id, arr = []) => {
+  return arr.findIndex(el => el.id === id);
+};
+
 const showCart = () => {
   brCart: while(true) {
     let string_cart = 'Ваша Корзина: \n';
@@ -48,25 +52,24 @@ const showCart = () => {
       if (!validIds.includes(good.id)) {
         validIds.push(good.id);
         string_cart  += `${good.name} - цена: ${good.price} - ${countById(good.id, card)}\n`;
+        alert(typeof(good.id));
       }
     }
     string_cart += `Общая стоимость покупки составляет: ${sumPriceGoods()} у. е. \n`;
 
     alert(string_cart);
-    const num = prompt('num');
+    const num = +prompt('num');
 
-    switch (+num) {
+    switch (num) {
       case 1:
       case 2:
       case 3:
       case 4:
       case 5:
       case 6:
-        const index = card.el.id.indexOf(num);
-        alert(index);
-        if (index > -1) {
-          card.splice(index, 1);
-        }
+        const index = findElById(num, card);
+        alert(typeof(num));
+        card.splice(index, 1);
         break;
 
       default:
