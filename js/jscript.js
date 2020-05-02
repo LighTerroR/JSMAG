@@ -52,10 +52,9 @@ const showCart = () => {
       if (!validIds.includes(good.id)) {
         validIds.push(good.id);
         string_cart  += `${good.name} - цена: ${good.price} - ${countById(good.id, card)}\n`;
-        alert(typeof(good.id));
       }
     }
-    string_cart += `Общая стоимость покупки составляет: ${sumPriceGoods()} у. е. \n`;
+    string_cart += `Общая стоимость покупки составляет: ${sumPriceGoods(card)} у. е. \n`;
 
     alert(string_cart);
     const num = +prompt('num');
@@ -68,7 +67,6 @@ const showCart = () => {
       case 5:
       case 6:
         const index = findElById(num, card);
-        alert(typeof(num));
         card.splice(index, 1);
         break;
 
@@ -79,16 +77,8 @@ const showCart = () => {
   }
 };
 
-const sumPriceGoods = () => {
-  let sum = 0;
-  let validateIds = [];
-  for(const good of card) {
-    if (!validateIds.includes(good.id)) {
-      validateIds.push(good.id);
-      sum += good.price * countById(good.id, card);
-    }
-  }
-  return sum;
+const sumPriceGoods = (arr) => {
+  return arr.reduce((sum, current) => sum + current.price, 0);
 };
 
 
